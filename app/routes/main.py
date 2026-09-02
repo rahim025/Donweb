@@ -7,6 +7,14 @@ from app.models import Post, Comment, Like, User
 main_bp = Blueprint("main", __name__)
 
 
+@main_bp.route("/mode/basculer", methods=["POST"])
+@login_required
+def toggle_data_mode():
+    current_user.data_mode = "economique" if current_user.data_mode == "complet" else "complet"
+    db.session.commit()
+    return redirect(request.referrer or url_for("main.feed"))
+
+
 @main_bp.route("/")
 @login_required
 def feed():
