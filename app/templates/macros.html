@@ -1,0 +1,7 @@
+{% macro smart_img(src, alt, css_class) -%}
+{% if current_user.is_authenticated and current_user.data_mode == 'economique' %}
+<div class="{{ css_class }} img-placeholder" title="Photo masquée (mode économique, sans données)">📷</div>
+{% else %}
+<img src="{{ src }}" class="{{ css_class }}" alt="{{ alt }}">
+{% endif %}
+{%- endmacro %}

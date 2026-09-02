@@ -15,6 +15,15 @@
             <a href="{{ url_for('main.directory') }}">Annuaire</a>
             <a href="{{ url_for('messages.inbox') }}">Messages</a>
             <a href="{{ url_for('profile.view_profile', user_id=current_user.id) }}">Mon profil</a>
+            <form method="POST" action="{{ url_for('main.toggle_data_mode') }}" class="mode-toggle-form">
+                <button type="submit" class="mode-toggle-btn">
+                    {% if current_user.data_mode == 'economique' %}
+                        📷 Activer les photos
+                    {% else %}
+                        📵 Mode sans photos
+                    {% endif %}
+                </button>
+            </form>
             <a href="{{ url_for('auth.logout') }}">Déconnexion</a>
         </div>
         {% endif %}

@@ -1,9 +1,10 @@
 {% extends "base.html" %}
+{% from "macros.html" import smart_img %}
 {% block title %}{{ profile_user.full_name }}{% endblock %}
 {% block content %}
 <div class="profile-header">
-    <img src="{{ url_for('static', filename='uploads/' ~ profile_user.cover_picture) }}" class="cover" alt="couverture">
-    <img src="{{ url_for('static', filename='uploads/' ~ profile_user.profile_picture) }}" class="avatar-lg" alt="avatar">
+    {{ smart_img(url_for('static', filename='uploads/' ~ profile_user.cover_picture), 'couverture', 'cover') }}
+    {{ smart_img(url_for('static', filename='uploads/' ~ profile_user.profile_picture), 'avatar', 'avatar-lg') }}
     <h1>{{ profile_user.full_name }}</h1>
     <p>{{ profile_user.role }} {% if profile_user.subject %}· {{ profile_user.subject }}{% endif %}</p>
     {% if profile_user.bio %}<p class="bio">{{ profile_user.bio }}</p>{% endif %}

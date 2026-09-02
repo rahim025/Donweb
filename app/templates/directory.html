@@ -1,11 +1,12 @@
 {% extends "base.html" %}
+{% from "macros.html" import smart_img %}
 {% block title %}Annuaire{% endblock %}
 {% block content %}
 <h1>Annuaire des enseignants — Lycée Don Bosco</h1>
 <div class="directory-grid">
     {% for teacher in teachers %}
     <a href="{{ url_for('profile.view_profile', user_id=teacher.id) }}" class="card teacher-card">
-        <img src="{{ url_for('static', filename='uploads/' ~ teacher.profile_picture) }}" class="avatar" alt="avatar">
+        {{ smart_img(url_for('static', filename='uploads/' ~ teacher.profile_picture), 'avatar', 'avatar') }}
         <h3>{{ teacher.full_name }}</h3>
         <p>{{ teacher.subject or teacher.role }}</p>
     </a>
