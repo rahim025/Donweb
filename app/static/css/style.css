@@ -1,0 +1,113 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+    font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    background: #f0f2f5;
+    color: #1c1e21;
+}
+
+/* Navbar */
+.navbar {
+    background: #1877f2;
+    color: white;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+.navbar-brand {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+}
+.navbar-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 18px;
+    font-size: 15px;
+}
+.navbar-links a:hover { text-decoration: underline; }
+
+.container { max-width: 1000px; margin: 20px auto; padding: 0 16px; }
+
+/* Cards */
+.card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+    padding: 16px;
+    margin-bottom: 16px;
+}
+
+/* Feed layout */
+.feed-layout { display: flex; gap: 20px; align-items: flex-start; }
+.sidebar {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    width: 220px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+}
+.main-feed { flex: 1; }
+
+/* Avatars */
+.avatar { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; }
+.avatar-sm { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; margin-right: 10px; }
+.avatar-lg { width: 140px; height: 140px; border-radius: 50%; object-fit: cover; border: 4px solid white; margin-top: -70px; margin-left: 20px; }
+
+/* Post */
+.post-header { display: flex; align-items: center; margin-bottom: 10px; }
+.post-date { font-size: 12px; color: #65676b; }
+.post-content { margin: 10px 0; white-space: pre-wrap; }
+.post-form textarea { width: 100%; min-height: 60px; border: 1px solid #ccd0d5; border-radius: 8px; padding: 10px; resize: vertical; }
+.post-actions { border-top: 1px solid #ced0d4; border-bottom: 1px solid #ced0d4; padding: 8px 0; margin: 8px 0; }
+
+.comments { margin-top: 8px; }
+.comment { background: #f0f2f5; border-radius: 12px; padding: 6px 12px; margin-bottom: 6px; font-size: 14px; }
+.comment-form { display: flex; gap: 8px; margin-top: 6px; }
+.comment-form input { flex: 1; border: 1px solid #ccd0d5; border-radius: 16px; padding: 6px 12px; }
+
+/* Buttons */
+.btn { display: inline-block; border: none; border-radius: 6px; padding: 10px 16px; font-size: 15px; cursor: pointer; text-decoration: none; }
+.btn-primary { background: #1877f2; color: white; width: 100%; }
+.btn-secondary { background: #e4e6eb; color: #1c1e21; }
+.btn-link { background: none; border: none; color: #65676b; cursor: pointer; font-size: 14px; }
+.btn-link.liked { color: #1877f2; font-weight: bold; }
+
+/* Auth pages */
+.auth-card { background: white; max-width: 400px; margin: 60px auto; padding: 30px; border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.15); text-align: center; }
+.auth-card h1 { color: #1877f2; margin-bottom: 8px; }
+.subtitle { color: #65676b; margin-bottom: 20px; }
+.auth-card form { display: flex; flex-direction: column; gap: 10px; text-align: left; }
+.auth-card input, .auth-card textarea { padding: 10px; border: 1px solid #ccd0d5; border-radius: 6px; font-size: 15px; }
+.auth-card label { font-size: 13px; font-weight: bold; margin-top: 6px; }
+
+/* Profile */
+.profile-header { background: white; border-radius: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.15); padding: 0 20px 20px; margin-bottom: 20px; text-align: left; }
+.cover { width: 100%; height: 200px; object-fit: cover; border-radius: 8px 8px 0 0; }
+.bio { color: #65676b; margin: 8px 0; }
+
+/* Directory */
+.directory-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
+.teacher-card { text-align: center; text-decoration: none; color: inherit; }
+
+/* Messages */
+.contact-item { display: flex; align-items: center; text-decoration: none; color: inherit; }
+.conversation-thread { background: white; border-radius: 8px; padding: 16px; min-height: 300px; margin-bottom: 12px; }
+.message { max-width: 60%; padding: 8px 12px; border-radius: 16px; margin-bottom: 8px; }
+.message.sent { background: #1877f2; color: white; margin-left: auto; }
+.message.received { background: #e4e6eb; }
+.message-date { display: block; font-size: 10px; opacity: 0.7; margin-top: 4px; }
+.message-form { display: flex; gap: 8px; }
+.message-form input { flex: 1; padding: 10px; border-radius: 20px; border: 1px solid #ccd0d5; }
+
+/* Flash messages */
+.flash { padding: 10px 16px; border-radius: 6px; margin-bottom: 12px; }
+.flash-danger { background: #fde2e1; color: #b3261e; }
+.flash-warning { background: #fff4ce; color: #7a5b00; }
+.flash-info, .flash-success { background: #d8f0d3; color: #1e5e20; }
