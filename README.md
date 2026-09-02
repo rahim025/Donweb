@@ -9,6 +9,7 @@ Réseau social interne réservé aux enseignants et professeurs du **Lycée Don 
 - Réseau de collègues (demandes, acceptation)
 - Messagerie privée
 - Annuaire des enseignants
+- **Mode économique / mode complet** : chaque utilisateur peut désactiver l'affichage des photos (bouton dans la barre de navigation) pour économiser sa connexion — les photos sont remplacées par un simple pictogramme, sans être téléchargées.
 
 ## Installation locale
 
@@ -44,8 +45,19 @@ git remote add origin https://github.com/<ton-utilisateur>/donweb.git
 git push -u origin main
 ```
 
+## Déploiement sur Render
+
+Le fichier `render.yaml` configure automatiquement :
+- le service web (Flask + gunicorn)
+- une base de données PostgreSQL gratuite, reliée via la variable `DATABASE_URL`
+
+Sur render.com : **New +** → **Blueprint** → sélectionne le repo `donweb`. Render lit `render.yaml` et crée le service web + la base ensemble.
+
+⚠️ Les photos uploadées (`app/static/uploads/`) ne sont pas stockées dans la base et restent sur le disque du serveur : sur le plan gratuit, elles seront perdues à chaque redéploiement. Pour les conserver durablement, prévoir un stockage externe (ex. Cloudinary, S3) ou un disque persistant Render.
+
 ## Pistes d'amélioration
 - Interface d'administration pour valider les comptes
 - Groupes par matière / niveau
 - Partage de documents pédagogiques
 - Notifications en temps réel
+- Stockage externe des images (Cloudinary/S3)
