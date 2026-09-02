@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Connexion{% endblock %}
+{% block content %}
+<div class="auth-card">
+    <h1>Donweb</h1>
+    <p class="subtitle">Le réseau des enseignants du Lycée Don Bosco</p>
+    <form method="POST">
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Mot de passe" required>
+        <button type="submit" class="btn btn-primary">Se connecter</button>
+    </form>
+    <p><a href="{{ url_for('auth.register') }}">Créer un compte</a></p>
+</div>
+{% endblock %}

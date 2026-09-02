@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Conversation avec {{ other.full_name }}{% endblock %}
+{% block content %}
+<h1>Conversation avec {{ other.full_name }}</h1>
+<div class="conversation-thread">
+    {% for msg in thread %}
+    <div class="message {% if msg.sender_id == current_user.id %}sent{% else %}received{% endif %}">
+        <p>{{ msg.content }}</p>
+        <span class="message-date">{{ msg.created_at.strftime('%d/%m %H:%M') }}</span>
+    </div>
+    {% else %}
+    <p>Aucun message pour l'instant. Dites bonjour !</p>
+    {% endfor %}
+</div>
+<form method="POST" class="message-form">
+    <input type="text" name="content" placeholder="Écrire un message..." required autocomplete="off">
+    <button type="submit" class="btn btn-primary">Envoyer</button>
+</form>
+{% endblock %}

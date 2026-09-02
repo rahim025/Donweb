@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Messages{% endblock %}
+{% block content %}
+<h1>Messages</h1>
+<div class="contact-list">
+    {% for contact in contacts %}
+    <a href="{{ url_for('messages.conversation', user_id=contact.id) }}" class="card contact-item">
+        <img src="{{ url_for('static', filename='uploads/' ~ contact.profile_picture) }}" class="avatar-sm" alt="avatar">
+        <span>{{ contact.full_name }}</span>
+    </a>
+    {% else %}
+    <p>Aucune conversation. Rendez-vous sur l'annuaire pour contacter un collègue.</p>
+    {% endfor %}
+</div>
+{% endblock %}

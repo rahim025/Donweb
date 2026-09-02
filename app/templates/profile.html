@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}{{ profile_user.full_name }}{% endblock %}
+{% block content %}
+<div class="profile-header">
+    <img src="{{ url_for('static', filename='uploads/' ~ profile_user.cover_picture) }}" class="cover" alt="couverture">
+    <img src="{{ url_for('static', filename='uploads/' ~ profile_user.profile_picture) }}" class="avatar-lg" alt="avatar">
+    <h1>{{ profile_user.full_name }}</h1>
+    <p>{{ profile_user.role }} {% if profile_user.subject %}· {{ profile_user.subject }}{% endif %}</p>
+    {% if profile_user.bio %}<p class="bio">{{ profile_user.bio }}</p>{% endif %}
+
+    {% if profile_user.id == current_user.id %}
+        <a href="{{ url_for('profile.edit_profile') }}" class="btn btn-secondary">Modifier mon profil</a>
+    {% else %}
+        {% if not friendship %}
+            <form method="POST" action="{{ url_for('profile.send_friend_request', user_id=profile_user.id) }}">
+                <button type="submit" class="btn btn-primary">Ajouter en collègue</button>
+            </form>
+        {% elif friendship.status == 'pending' and friendship.receiver_id == current_user.id %}
+            <form method="POST" action="{{ url_for('profile.accept_friend_request', friendship_id=friendship.id) }}">
+                <button type="submit" class="btn btn-primary">Accepter la demande</button>
+            </form>
+        {% elif friendship.status == 'pending' %}
+            <span>Demande envoyée</span>
+        {% else %}
+            <a href="{{ url_for('messages.conversation', user_id=profile_user.id) }}" class="btn btn-secondary">Envoyer un message</a>
+        {% endif %}
+    {% endif %}
+</div>
+
+<div class="main-feed">
+    {% for post in posts %}
+    <div class="card post">
+        <p class="post-content">{{ post.content }}</p>
+        <div class="post-date">{{ post.created_at.strftime('%d/%m/%Y %H:%M') }}</div>
+    </div>
+    {% else %}
+    <p>Aucune publication.</p>
+    {% endfor %}
+</div>
+{% endblock %}

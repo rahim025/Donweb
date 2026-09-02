@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Modifier mon profil{% endblock %}
+{% block content %}
+<div class="auth-card">
+    <h1>Modifier mon profil</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label>Nom complet</label>
+        <input type="text" name="full_name" value="{{ current_user.full_name }}">
+
+        <label>Fonction</label>
+        <input type="text" name="role" value="{{ current_user.role }}">
+
+        <label>Matière enseignée</label>
+        <input type="text" name="subject" value="{{ current_user.subject or '' }}">
+
+        <label>Bio</label>
+        <textarea name="bio">{{ current_user.bio or '' }}</textarea>
+
+        <label>Photo de profil</label>
+        <input type="file" name="profile_picture">
+
+        <button type="submit" class="btn btn-primary">Enregistrer</button>
+    </form>
+</div>
+{% endblock %}

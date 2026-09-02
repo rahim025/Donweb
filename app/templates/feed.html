@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Fil d'actualité{% endblock %}
+{% block content %}
+<div class="feed-layout">
+    <aside class="sidebar">
+        <img src="{{ url_for('static', filename='uploads/' ~ current_user.profile_picture) }}" class="avatar" alt="avatar">
+        <h3>{{ current_user.full_name }}</h3>
+        <p>{{ current_user.subject or "Enseignant" }}</p>
+        <a href="{{ url_for('profile.view_profile', user_id=current_user.id) }}" class="btn btn-secondary">Voir mon profil</a>
+    </aside>
+
+    <main class="main-feed">
+        <div class="card post-form">
+            <form method="POST" action="{{ url_for('main.create_post') }}">
+                <textarea name="content" placeholder="Quoi de neuf, {{ current_user.full_name.split(' ')[0] }} ?" required></textarea>
+                <button type="submit" class="btn btn-primary">Publier</button>
+            </form>
+        </div>
+
+        {% for post in posts %}
+        <div class="card post">
+            <div class="post-header">
+                <img src="{{ url_for('static', filename='uploads/' ~ post.author.profile_picture) }}" class="avatar-sm" alt="avatar">
+                <div>
+                    <a href="{{ url_for('profile.view_profile', user_id=post.author.id) }}"><strong>{{ post.author.full_name }}</strong></a>
+                    <div class="post-date">{{ post.created_at.strftime('%d/%m/%Y %H:%M') }}</div>
+                </div>
+            </div>
+            <p class="post-content">{{ post.content }}</p>
+
+            <div class="post-actions">
+                <form method="POST" action="{{ url_for('main.toggle_like', post_id=post.id) }}">
+                    <button type="submit" class="btn-link {% if post.is_liked_by(current_user) %}liked{% endif %}">
+                        👍 J'aime ({{ post.like_count() }})
+                    </button>
+                </form>
+            </div>
+
+            <div class="comments">
+                {% for comment in post.comments %}
+                <div class="comment">
+                    <strong>{{ comment.author.full_name }}</strong> {{ comment.content }}
+                </div>
+                {% endfor %}
+                <form method="POST" action="{{ url_for('main.add_comment', post_id=post.id) }}" class="comment-form">
+                    <input type="text" name="content" placeholder="Écrire un commentaire..." required>
+                    <button type="submit" class="btn-link">Envoyer</button>
+                </form>
+            </div>
+        </div>
+        {% else %}
+        <p>Aucune publication pour le moment. Soyez le premier à publier !</p>
+        {% endfor %}
+    </main>
+</div>
+{% endblock %}
