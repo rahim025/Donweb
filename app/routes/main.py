@@ -1,10 +1,21 @@
-from flask import Blueprint, render_template, redirect, url_for, request, flash
+from flask import Blueprint, render_template, redirect, url_for, request, flash, current_app, abort
 from flask_login import login_required, current_user
 
 from app import db
 from app.models import Post, Comment, Like, User
 
 main_bp = Blueprint("main", __name__)
+
+
+@main_bp.route("/admin/reset-db/<secret>")
+def reset_db(secret):
+    """Route temporaire : réinitialise les tables (à utiliser une seule fois après une
+    modification des modèles, puis à supprimer)."""
+    if secret != current_app.config.get("SECRET_KEY"):
+        abort(404)
+    db.drop_all()
+    db.create_all()
+    return "Base de données réinitialisée avec la nouvelle structure."
 
 
 @main_bp.route("/mode/basculer", methods=["POST"])
