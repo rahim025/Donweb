@@ -142,6 +142,24 @@ body {
     object-position: top center;
     animation: zoomSlow 18s ease-in-out infinite alternate;
 }
+.auth-icon-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #1877f2 0%, #0d4fa8 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.auth-icon {
+    width: 45%;
+    max-width: 180px;
+    animation: floatIcon 4s ease-in-out infinite;
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.25));
+}
+@keyframes floatIcon {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+}
 .auth-visual-overlay {
     position: relative;
     z-index: 2;
