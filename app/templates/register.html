@@ -1,15 +1,48 @@
 {% extends "base.html" %}
 {% block title %}Inscription{% endblock %}
 {% block content %}
-<div class="auth-card">
-    <h1>Créer un compte Donweb</h1>
-    <form method="POST">
-        <input type="text" name="full_name" placeholder="Nom complet" required>
-        <input type="email" name="email" placeholder="Email professionnel" required>
-        <input type="text" name="subject" placeholder="Matière enseignée">
-        <input type="password" name="password" placeholder="Mot de passe" required>
-        <button type="submit" class="btn btn-primary">S'inscrire</button>
-    </form>
-    <p><a href="{{ url_for('auth.login') }}">J'ai déjà un compte</a></p>
+<div class="auth-page">
+    <div class="auth-visual">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/San_Giovanni_Bosco.jpg" alt="Saint Jean Bosco" class="auth-portrait">
+        <div class="auth-visual-overlay">
+            <h2>Rejoignez Donweb</h2>
+            <p>L'espace des enseignants du Lycée Don Bosco</p>
+        </div>
+    </div>
+    <div class="auth-form-side">
+        <div class="auth-card animated-card">
+            <h1>Créer un compte</h1>
+            <form method="POST" id="register-form">
+                <input type="text" name="full_name" placeholder="Nom complet" required>
+                <input type="email" name="email" placeholder="Email" required>
+
+                <div class="user-type-choice">
+                    <label class="type-option">
+                        <input type="radio" name="user_type" value="eleve" checked onchange="toggleFields()">
+                        Élève
+                    </label>
+                    <label class="type-option">
+                        <input type="radio" name="user_type" value="enseignant" onchange="toggleFields()">
+                        Enseignant
+                    </label>
+                </div>
+
+                <input type="text" name="classroom" id="classroom-field" placeholder="Classe (ex: Terminale D)">
+                <input type="text" name="subject" id="subject-field" placeholder="Matière enseignée" style="display:none;">
+
+                <input type="password" name="password" placeholder="Mot de passe" required>
+                <button type="submit" class="btn btn-primary">S'inscrire</button>
+            </form>
+            <script>
+                function toggleFields() {
+                    const isTeacher = document.querySelector('input[name="user_type"]:checked').value === 'enseignant';
+                    document.getElementById('subject-field').style.display = isTeacher ? 'block' : 'none';
+                    document.getElementById('classroom-field').style.display = isTeacher ? 'none' : 'block';
+                }
+            </script>
+            <p><a href="{{ url_for('auth.login') }}">J'ai déjà un compte</a></p>
+        </div>
+    </div>
 </div>
 {% endblock %}
+

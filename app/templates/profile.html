@@ -6,7 +6,14 @@
     {{ smart_img(url_for('static', filename='uploads/' ~ profile_user.cover_picture), 'couverture', 'cover') }}
     {{ smart_img(url_for('static', filename='uploads/' ~ profile_user.profile_picture), 'avatar', 'avatar-lg') }}
     <h1>{{ profile_user.full_name }}</h1>
-    <p>{{ profile_user.role }} {% if profile_user.subject %}· {{ profile_user.subject }}{% endif %}</p>
+    <p>
+        {{ profile_user.role }}
+        {% if profile_user.user_type == 'enseignant' and profile_user.subject %}
+            · {{ profile_user.subject }}
+        {% elif profile_user.user_type == 'eleve' and profile_user.classroom %}
+            · {{ profile_user.classroom }}
+        {% endif %}
+    </p>
     {% if profile_user.bio %}<p class="bio">{{ profile_user.bio }}</p>{% endif %}
 
     {% if profile_user.id == current_user.id %}
