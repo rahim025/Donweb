@@ -17,6 +17,8 @@ def register():
         email = request.form.get("email", "").strip().lower()
         password = request.form.get("password", "")
         subject = request.form.get("subject", "").strip()
+        user_type = request.form.get("user_type", "eleve")
+        classroom = request.form.get("classroom", "").strip()
 
         allowed_domain = current_app.config.get("ALLOWED_EMAIL_DOMAIN")
         if allowed_domain and not email.endswith("@" + allowed_domain):
@@ -27,7 +29,14 @@ def register():
             flash("Un compte existe déjà avec cet email.", "danger")
             return redirect(url_for("auth.register"))
 
-        user = User(full_name=full_name, email=email, subject=subject)
+        user = User(
+            full_name=full_name,
+            email=email,
+            subject=subject if user_type == "enseignant" else None,
+            user_type=user_type,
+            classroom=classroom if user_type == "eleve" else None,
+            role="Enseignant" if user_type == "enseignant" else "Élève",
+        )
         user.set_password(password)
         db.session.add(user)
         db.session.commit()
