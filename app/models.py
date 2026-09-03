@@ -12,12 +12,17 @@ class User(UserMixin, db.Model):
 
     role = db.Column(db.String(50), default="Enseignant")   # ex: "Enseignant de Maths", "Surveillant"...
     subject = db.Column(db.String(100))                      # matière enseignée
+    user_type = db.Column(db.String(20), default="enseignant")  # "enseignant" ou "eleve"
+    classroom = db.Column(db.String(50))                      # classe de l'élève (ex: "Terminale D")
     bio = db.Column(db.Text)
     profile_picture = db.Column(db.String(255), default="default_avatar.png")
     cover_picture = db.Column(db.String(255), default="default_cover.png")
 
     is_approved = db.Column(db.Boolean, default=False)       # validation par un admin
     is_admin = db.Column(db.Boolean, default=False)
+
+    # "complet" = affiche les photos, "economique" = masque les photos (mode sans données)
+    data_mode = db.Column(db.String(20), default="complet")
 
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
