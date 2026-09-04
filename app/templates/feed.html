@@ -2,6 +2,13 @@
 {% from "macros.html" import smart_img %}
 {% block title %}Fil d'actualité{% endblock %}
 {% block content %}
+<div class="welcome-banner">
+    <img src="{{ url_for('static', filename='img/don_bosco_welcome.jpg') }}" alt="San Juan Bosco" class="welcome-banner-img">
+    <div class="welcome-banner-text">
+        <p class="welcome-quote">« L'éducation est une affaire de cœur. »</p>
+        <span class="welcome-signature">— Don Bosco</span>
+    </div>
+</div>
 <div class="feed-layout">
     <aside class="sidebar">
         {{ smart_img(url_for('static', filename='uploads/' ~ current_user.profile_picture), 'avatar', 'avatar') }}
