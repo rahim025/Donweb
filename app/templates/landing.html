@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Bienvenue{% endblock %}
+{% block content %}
+<div class="landing-hero">
+    <img src="{{ url_for('static', filename='img/don_bosco_welcome.jpg') }}" alt="San Juan Bosco" class="landing-hero-img">
+    <h1>Donweb</h1>
+    <p class="landing-tagline">Le réseau social du <strong>Lycée Don Bosco</strong> — enseignants et élèves réunis.</p>
+    <p class="landing-quote">« {{ quote }} »<span> — Don Bosco</span></p>
+    <div class="landing-cta">
+        <a href="{{ url_for('auth.login') }}" class="btn btn-primary">Se connecter</a>
+        <a href="{{ url_for('auth.register') }}" class="btn btn-secondary">Créer un compte</a>
+    </div>
+</div>
+
+<div class="landing-features">
+    <div class="feature-card">
+        <span class="feature-icon">📰</span>
+        <h3>Fil d'actualité</h3>
+        <p>Partagez vos publications, réagissez et commentez celles de vos collègues et camarades.</p>
+    </div>
+    <div class="feature-card">
+        <span class="feature-icon">👥</span>
+        <h3>Réseau</h3>
+        <p>Retrouvez enseignants et élèves du lycée dans un annuaire simple, et échangez en privé.</p>
+    </div>
+    <div class="feature-card">
+        <span class="feature-icon">📵</span>
+        <h3>Mode économique</h3>
+        <p>Naviguez sans charger les photos pour économiser votre connexion, à tout moment.</p>
+    </div>
+</div>
+{% endblock %}

@@ -8,7 +8,7 @@
 </head>
 <body>
     <nav class="navbar">
-        <a href="{{ url_for('main.feed') }}" class="navbar-brand">Donweb</a>
+        <a href="{{ url_for('main.home') }}" class="navbar-brand">Donweb</a>
         {% if current_user.is_authenticated %}
         <div class="navbar-links">
             <a href="{{ url_for('main.feed') }}">Accueil</a>
