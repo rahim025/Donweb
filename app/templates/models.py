@@ -12,6 +12,8 @@ class User(UserMixin, db.Model):
 
     role = db.Column(db.String(50), default="Enseignant")   # ex: "Enseignant de Maths", "Surveillant"...
     subject = db.Column(db.String(100))                      # matière enseignée
+    user_type = db.Column(db.String(20), default="enseignant")  # "enseignant" ou "eleve"
+    classroom = db.Column(db.String(50))                      # classe de l'élève (ex: "Terminale D")
     bio = db.Column(db.Text)
     profile_picture = db.Column(db.String(255), default="default_avatar.png")
     cover_picture = db.Column(db.String(255), default="default_cover.png")
@@ -81,6 +83,16 @@ class Like(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     __table_args__ = (db.UniqueConstraint("post_id", "user_id", name="unique_like"),)
+
+
+class Announcement(db.Model):
+    """Annonce officielle du lycée, épinglée en haut du fil d'actualité."""
+    id = db.Column(db.Integer, primary_key=True)
+    author_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+    content = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    author = db.relationship("User")
 
 
 class Message(db.Model):
